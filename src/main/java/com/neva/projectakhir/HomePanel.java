@@ -19,6 +19,11 @@ public class HomePanel extends javax.swing.JFrame {
     private Timer progressTimer;
     private int songDurationInSeconds = 0;
     private int currentPositionInSeconds = 0;
+    private DefaultListModel history = new DefaultListModel();
+
+    
+    
+    
     
     public HomePanel() {
         jPanel1 = new javax.swing.JPanel();
@@ -35,6 +40,8 @@ public class HomePanel extends javax.swing.JFrame {
         });
         volumeSlider.addChangeListener(e -> adjustVolume());
     }
+  
+
     private String formatTime(int timeInSeconds) {
         int minutes = timeInSeconds / 60;
         int seconds = timeInSeconds % 60;
@@ -84,6 +91,8 @@ public class HomePanel extends javax.swing.JFrame {
         currentTimeLabel = new javax.swing.JLabel();
         totalTimeLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        PlaylistHistory = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -218,7 +227,7 @@ public class HomePanel extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 265, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 266, Short.MAX_VALUE)
                         .addComponent(playButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Pause)
@@ -267,6 +276,13 @@ public class HomePanel extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        PlaylistHistory.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(PlaylistHistory);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -278,15 +294,23 @@ public class HomePanel extends javax.swing.JFrame {
                     .addComponent(songButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(browseButton, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(208, 208, 208))
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(118, 118, 118)
+                        .addComponent(jScrollPane1)
+                        .addGap(43, 43, 43)))
                 .addGap(34, 34, 34)
                 .addComponent(songButton, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
                 .addGap(30, 30, 30)
@@ -362,6 +386,14 @@ public class HomePanel extends javax.swing.JFrame {
             }
         }
         
+        
+//jList1 = new JList(model);
+
+    history.addElement(AudioPlayer.getFile().getName());
+PlaylistHistory.setModel(history);
+
+        
+        
     }//GEN-LAST:event_browseButtonActionPerformed
 
     private void PauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PauseActionPerformed
@@ -412,6 +444,8 @@ public class HomePanel extends javax.swing.JFrame {
     }//GEN-LAST:event_stopButtonActionPerformed
 
 
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -445,6 +479,7 @@ public class HomePanel extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Pause;
+    private javax.swing.JList<String> PlaylistHistory;
     private javax.swing.JButton browseButton;
     private javax.swing.JLabel currentTimeLabel;
     private javax.swing.JLabel jLabel1;
@@ -455,6 +490,7 @@ public class HomePanel extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton playButton;
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JButton songButton;
