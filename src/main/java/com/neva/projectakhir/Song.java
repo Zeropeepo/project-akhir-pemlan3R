@@ -24,5 +24,8 @@ public class Song {
     public File getFile() {
         return file;
     }
+    public String toString(){
+    return file.getName();
+    }
 }
 

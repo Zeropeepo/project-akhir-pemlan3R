@@ -7,6 +7,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sound.sampled.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -20,7 +22,7 @@ public class HomePanel extends javax.swing.JFrame {
     private int songDurationInSeconds = 0;
     private int currentPositionInSeconds = 0;
     private DefaultListModel history = new DefaultListModel();
-
+    private PlaylistManager playlistmanager = new PlaylistManager();
     
     
     
@@ -93,6 +95,7 @@ public class HomePanel extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         PlaylistHistory = new javax.swing.JList<>();
+        PlaySelected = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -283,6 +286,17 @@ public class HomePanel extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(PlaylistHistory);
 
+        PlaySelected.setBackground(new java.awt.Color(80, 80, 80));
+        PlaySelected.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
+        PlaySelected.setForeground(new java.awt.Color(255, 255, 255));
+        PlaySelected.setText("Play Selected");
+        PlaySelected.setToolTipText("");
+        PlaySelected.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PlaySelectedActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -294,9 +308,11 @@ public class HomePanel extends javax.swing.JFrame {
                     .addComponent(songButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(browseButton, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(208, 208, 208))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 503, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
+                    .addComponent(PlaySelected, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE))
+                .addGap(41, 41, 41))
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -309,11 +325,16 @@ public class HomePanel extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(118, 118, 118)
-                        .addComponent(jScrollPane1)
-                        .addGap(43, 43, 43)))
-                .addGap(34, 34, 34)
-                .addComponent(songButton, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-                .addGap(30, 30, 30)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(songButton, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                        .addGap(30, 30, 30))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(PlaySelected, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+                        .addGap(68, 68, 68)))
                 .addComponent(browseButton, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -387,9 +408,21 @@ public class HomePanel extends javax.swing.JFrame {
         }
         
         
-//jList1 = new JList(model);
 
-    history.addElement(AudioPlayer.getFile().getName());
+        
+        try {
+            playlistmanager.addSong(new Song(fileChooser.getSelectedFile()));
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(HomePanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(HomePanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (LineUnavailableException ex) {
+            Logger.getLogger(HomePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        history.clear(); 
+        history.addAll(playlistmanager.getPlaylist());             
+    //history.addElement(AudioPlayer.getFile().getName());
 PlaylistHistory.setModel(history);
 
         
@@ -443,6 +476,45 @@ PlaylistHistory.setModel(history);
         
     }//GEN-LAST:event_stopButtonActionPerformed
 
+    private void PlaySelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlaySelectedActionPerformed
+
+        AudioPlayer.stop();
+        int indexnya = PlaylistHistory.getSelectedIndex();  
+                       // Get the selected file
+                File filenya=playlistmanager.getSongbyIndex(indexnya).getFile(); 
+                audioFile = filenya;
+        try {
+            if (AudioPlayer.getClip() != null && AudioPlayer.getClip().isOpen()) {
+                    AudioPlayer.stop();
+                }
+            AudioPlayer.loadAudio(audioFile);
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(HomePanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(HomePanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (LineUnavailableException ex) {
+            Logger.getLogger(HomePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                currentSongName = audioFile.getName();
+                songNameLabel.setText(currentSongName);
+                
+                // Set up the volume control
+                if (AudioPlayer.getClip().isControlSupported(FloatControl.Type.MASTER_GAIN)) {
+                    volumeControl = (FloatControl) AudioPlayer.getClip().getControl(FloatControl.Type.MASTER_GAIN);
+                    adjustVolume();
+                }
+                
+                // Calculate duration
+                songDurationInSeconds = (int)(AudioPlayer.getClip().getMicrosecondLength() / 1000000);
+                progressBar.setMaximum(songDurationInSeconds);
+                updateTimeLabels();
+                
+                // Play automatically
+                playButton.doClick();
+             
+        
+    }//GEN-LAST:event_PlaySelectedActionPerformed
+
 
     
     
@@ -479,6 +551,7 @@ PlaylistHistory.setModel(history);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Pause;
+    private javax.swing.JButton PlaySelected;
     private javax.swing.JList<String> PlaylistHistory;
     private javax.swing.JButton browseButton;
     private javax.swing.JLabel currentTimeLabel;
