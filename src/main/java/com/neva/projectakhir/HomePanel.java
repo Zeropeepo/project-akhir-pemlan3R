@@ -1,5 +1,6 @@
 package com.neva.projectakhir;
 
+import com.neva.projectakhir.AudioPlayer;
 import javazoom.jl.player.Player;
 import javax.swing.*;
 import java.awt.*;
@@ -12,10 +13,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class HomePanel extends javax.swing.JFrame {
     
     private File audioFile;
-    private Clip audioClip;
     private FloatControl volumeControl;
-    private boolean isPlaying = false;
-    private long clipTimePosition = 0;
     
     private String currentSongName = "No song selected";
     private Timer progressTimer;
@@ -28,8 +26,8 @@ public class HomePanel extends javax.swing.JFrame {
         progressTimer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (isPlaying && audioClip != null) {
-                    currentPositionInSeconds = (int)(audioClip.getMicrosecondPosition() / 1000000);
+                if (AudioPlayer.isPlaying() && AudioPlayer.getClip() != null) {
+                    currentPositionInSeconds = (int)(AudioPlayer.getClip().getMicrosecondPosition() / 1000000);
                     progressBar.setValue(currentPositionInSeconds);
                     updateTimeLabels();
                 }
@@ -50,11 +48,10 @@ public class HomePanel extends javax.swing.JFrame {
     }
     
     private void adjustVolume() {
-        if (volumeControl != null) {
+        if (AudioPlayer.getClip() != null && AudioPlayer.getClip().isControlSupported(FloatControl.Type.MASTER_GAIN)) {
+            volumeControl = (FloatControl) AudioPlayer.getClip().getControl(FloatControl.Type.MASTER_GAIN);
             float volume = volumeSlider.getValue() / 100.0f;
-            // Convert to decibels (logarithmic scale)
             float dB = (float) (Math.log10(volume) * 20.0f);
-            // Ensure volume is within valid range
             if (dB < volumeControl.getMinimum()) {
                 dB = volumeControl.getMinimum();
             }
@@ -327,36 +324,31 @@ public class HomePanel extends javax.swing.JFrame {
     private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
         JFileChooser fileChooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                "Audio Files", "wav", "mp3", "aiff", "au");
+                "Audio Files", "wav", "aiff", "au");
         fileChooser.setFileFilter(filter);
         
         int returnVal = fileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             try {
                 // Stop any currently playing audio
-                if (audioClip != null && audioClip.isOpen()) {
-                    audioClip.stop();
-                    audioClip.close();
+                if (AudioPlayer.getClip() != null && AudioPlayer.getClip().isOpen()) {
+                    AudioPlayer.stop();
                 }
                 
                 // Get the selected file
                 audioFile = fileChooser.getSelectedFile();
+                AudioPlayer.loadAudio(audioFile);
                 currentSongName = audioFile.getName();
                 songNameLabel.setText(currentSongName);
                 
-                // Open and prepare the audio file
-                AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
-                audioClip = AudioSystem.getClip();
-                audioClip.open(audioStream);
-                
                 // Set up the volume control
-                if (audioClip.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
-                    volumeControl = (FloatControl) audioClip.getControl(FloatControl.Type.MASTER_GAIN);
+                if (AudioPlayer.getClip().isControlSupported(FloatControl.Type.MASTER_GAIN)) {
+                    volumeControl = (FloatControl) AudioPlayer.getClip().getControl(FloatControl.Type.MASTER_GAIN);
                     adjustVolume();
                 }
                 
                 // Calculate duration
-                songDurationInSeconds = (int)(audioClip.getMicrosecondLength() / 1000000);
+                songDurationInSeconds = (int)(AudioPlayer.getClip().getMicrosecondLength() / 1000000);
                 progressBar.setMaximum(songDurationInSeconds);
                 updateTimeLabels();
                 
@@ -373,30 +365,28 @@ public class HomePanel extends javax.swing.JFrame {
     }//GEN-LAST:event_browseButtonActionPerformed
 
     private void PauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PauseActionPerformed
-        if (audioClip != null && isPlaying) {
-            clipTimePosition = audioClip.getMicrosecondPosition();
-            audioClip.stop();
-            isPlaying = false;
+        if (AudioPlayer.getClip() != null && AudioPlayer.isPlaying()) {
+            AudioPlayer.pause();
             progressTimer.stop();
         }
     }//GEN-LAST:event_PauseActionPerformed
 
     private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playButtonActionPerformed
-        if (audioClip != null) {
-            if (!isPlaying) {
-                audioClip.setMicrosecondPosition(clipTimePosition);
-                audioClip.start();
-                isPlaying = true;
+        if (AudioPlayer.getClip() != null) {
+            if (!AudioPlayer.isPlaying()) {
+                AudioPlayer.start();
                 progressTimer.start();
-                
-                // Add a listener for when the clip ends
-                audioClip.addLineListener(new LineListener() {
+                // Optionally, add a listener for when the clip ends
+                AudioPlayer.getClip().addLineListener(new LineListener() {
                     @Override
                     public void update(LineEvent event) {
                         if (event.getType() == LineEvent.Type.STOP) {
-                            if (audioClip.getMicrosecondPosition() >= audioClip.getMicrosecondLength()) {
-                                // Clip has ended naturally
-                                stopButton.doClick();
+                            if (AudioPlayer.getClip().getMicrosecondPosition() >= AudioPlayer.getClip().getMicrosecondLength()) {
+                                // Song ended
+                                progressTimer.stop();
+                                progressBar.setValue(0);
+                                currentPositionInSeconds = 0;
+                                updateTimeLabels();
                             }
                         }
                     }
@@ -411,13 +401,12 @@ public class HomePanel extends javax.swing.JFrame {
     }//GEN-LAST:event_playButtonActionPerformed
 
     private void stopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopButtonActionPerformed
-        if (audioClip != null) {
-            audioClip.stop();
-            audioClip.setMicrosecondPosition(0);
-            clipTimePosition = 0;
-            isPlaying = false;
+        if (AudioPlayer.getClip() != null) {
+            AudioPlayer.stop();
             progressTimer.stop();
+            progressBar.setValue(0);
             currentPositionInSeconds = 0;
+            updateTimeLabels();
         }
         
     }//GEN-LAST:event_stopButtonActionPerformed

@@ -9,7 +9,7 @@ public class Song {
     private File file;
     AudioInputStream audioStream;
     public Song(File file) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-         audioStream = AudioSystem.getAudioInputStream(file);
+        audioStream = AudioSystem.getAudioInputStream(file);
         clip = AudioSystem.getClip();
         clip.open(audioStream);
         name= file.getName();

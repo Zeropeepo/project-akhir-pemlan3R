@@ -15,7 +15,6 @@ public class AudioPlayer {
     public static long getDuration() {
         return clip.getMicrosecondLength();
     }
-
     public static boolean isPlaying() {
         return Playing;
     }
@@ -51,7 +50,13 @@ public class AudioPlayer {
 
     }
 
+    
+    
     public static void loadAudio(File file) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
        clip = (new Song(file)).getclip();
+    }
+
+    public static Clip getClip() {
+        return clip;
     }
 }
