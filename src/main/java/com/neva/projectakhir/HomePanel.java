@@ -369,8 +369,6 @@ public class HomePanel extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_songButtonActionPerformed
-    private Player mp3Player;
-    private Thread mp3Thread;
 
     private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
         JFileChooser fileChooser = new JFileChooser();
