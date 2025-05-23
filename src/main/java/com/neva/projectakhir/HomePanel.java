@@ -5,8 +5,9 @@ import javazoom.jl.player.Player;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.*;
@@ -99,6 +100,17 @@ public class HomePanel extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -410,12 +422,21 @@ public class HomePanel extends javax.swing.JFrame {
                 ex.printStackTrace();
             }
         }
-        
-        
 
-        
+
+
         try {
-            playlistmanager.addSong(new Song(fileChooser.getSelectedFile()));
+
+            var playlistpointerchecker = playlistmanager.getPlaylist();
+            boolean hasexisted = false;
+            for (Song song : playlistpointerchecker) {
+                if (song.getFile().getAbsolutePath().equals(audioFile.getAbsolutePath())) {
+                    hasexisted = true;
+                    break;
+                }
+            }
+            if (!hasexisted) {
+            playlistmanager.addSong(new Song(fileChooser.getSelectedFile()));}
         } catch (UnsupportedAudioFileException ex) {
             Logger.getLogger(HomePanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -423,22 +444,32 @@ public class HomePanel extends javax.swing.JFrame {
         } catch (LineUnavailableException ex) {
             Logger.getLogger(HomePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        history.clear(); 
-        history.addAll(playlistmanager.getPlaylist());             
-    //history.addElement(AudioPlayer.getFile().getName());
-PlaylistHistory.setModel(history);
 
-        
-        
+updatelist();
+
+
     }//GEN-LAST:event_browseButtonActionPerformed
 
+
+    private void updatelist(){
+            history.clear();
+            history.addAll(playlistmanager.getPlaylist());
+            PlaylistHistory.setModel(history);
+        System.out.println("Updated Playlist");
+
+
+}
     private void PauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PauseActionPerformed
         if (AudioPlayer.getClip() != null && AudioPlayer.isPlaying()) {
             AudioPlayer.pause();
             progressTimer.stop();
         }
     }//GEN-LAST:event_PauseActionPerformed
+
+
+
+
+
 
     private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playButtonActionPerformed
         if (AudioPlayer.getClip() != null) {
@@ -462,11 +493,11 @@ PlaylistHistory.setModel(history);
                 });
             }
         } else {
-            JOptionPane.showMessageDialog(this, 
-                "Please select an audio file first.", 
+            JOptionPane.showMessageDialog(this,
+                "Please select an audio file first.",
                 "No File Selected", JOptionPane.INFORMATION_MESSAGE);
         }
-        
+
     }//GEN-LAST:event_playButtonActionPerformed
 
     private void stopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopButtonActionPerformed
@@ -477,15 +508,16 @@ PlaylistHistory.setModel(history);
             currentPositionInSeconds = 0;
             updateTimeLabels();
         }
-        
+
     }//GEN-LAST:event_stopButtonActionPerformed
 
     private void PlaySelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlaySelectedActionPerformed
 
+        if (AudioPlayer.getClip() != null&& AudioPlayer.isPlaying())
         AudioPlayer.stop();
-        int indexnya = PlaylistHistory.getSelectedIndex();  
+        int indexnya = PlaylistHistory.getSelectedIndex();
                        // Get the selected file
-                File filenya=playlistmanager.getSongbyIndex(indexnya).getFile(); 
+                File filenya=playlistmanager.getSongbyIndex(indexnya).getFile();
                 audioFile = filenya;
         try {
             if (AudioPlayer.getClip() != null && AudioPlayer.getClip().isOpen()) {
@@ -501,32 +533,82 @@ PlaylistHistory.setModel(history);
         }
                 currentSongName = audioFile.getName();
                 songNameLabel.setText(currentSongName);
-                
+
                 // Set up the volume control
                 if (AudioPlayer.getClip().isControlSupported(FloatControl.Type.MASTER_GAIN)) {
                     volumeControl = (FloatControl) AudioPlayer.getClip().getControl(FloatControl.Type.MASTER_GAIN);
                     adjustVolume();
                 }
-                
+
                 // Calculate duration
                 songDurationInSeconds = (int)(AudioPlayer.getClip().getMicrosecondLength() / 1000000);
                 progressBar.setMaximum(songDurationInSeconds);
                 updateTimeLabels();
-                
+
                 // Play automatically
                 playButton.doClick();
-             
-        
+
+
     }//GEN-LAST:event_PlaySelectedActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+    File file = new File("DataUser.txt");
 
-    
-    
+
+        try(FileWriter fw = new FileWriter(file, false)){ // false = overwrite
+            for (Song s : playlistmanager.getPlaylist()) {
+                fw.write(s.getFile().getAbsolutePath() + "\n");
+            }
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        updatelist();
+
+    }//GEN-LAST:event_formWindowClosing
+
+
+    boolean PlaylistLoaded=false;
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+
+        if (PlaylistLoaded) {
+            return;
+        }
+        PlaylistLoaded = true;
+        System.out.println("Load txt");
+        File file = new File("DataUser.txt");
+
+        try(FileReader fr = new FileReader(file)){
+            Scanner sc = new Scanner(fr);
+            var playlistpointer=playlistmanager.getPlaylist();
+            while (sc.hasNextLine()) {
+                try{
+                playlistpointer.add(new Song(new File(sc.nextLine())));}
+                catch (FileNotFoundException e){
+                    JOptionPane.showConfirmDialog(this, "Saved song not found: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
+            throw new RuntimeException(e);
+        }
+
+        updatelist();
+    }//GEN-LAST:event_formWindowActivated
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowOpened
+
+
+
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -545,7 +627,7 @@ PlaylistHistory.setModel(history);
             java.util.logging.Logger.getLogger(HomePanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new HomePanel().setVisible(true);
