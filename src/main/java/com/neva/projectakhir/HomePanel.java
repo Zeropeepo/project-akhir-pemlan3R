@@ -398,7 +398,7 @@ public class HomePanel extends javax.swing.JFrame {
                 
                 // Get the selected file
                 audioFile = fileChooser.getSelectedFile();
-                AudioPlayer.loadAudio(audioFile);
+                AudioPlayer.loadAudio(new Song(audioFile));
                 currentSongName = audioFile.getName();
                 songNameLabel.setText(currentSongName);
                 
@@ -523,7 +523,7 @@ updatelist();
             if (AudioPlayer.getClip() != null && AudioPlayer.getClip().isOpen()) {
                     AudioPlayer.stop();
                 }
-            AudioPlayer.loadAudio(audioFile);
+            AudioPlayer.loadAudio(new Song(audioFile));
         } catch (UnsupportedAudioFileException ex) {
             Logger.getLogger(HomePanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -611,7 +611,8 @@ updatelist();
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            for (javax.swing.UIManager.LookAndFeelInfo info :
+                    javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
