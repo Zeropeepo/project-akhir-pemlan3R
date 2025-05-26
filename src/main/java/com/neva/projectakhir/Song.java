@@ -24,8 +24,10 @@ public class Song {
     public File getFile() {
         return file;
     }
+
+    @Override
     public String toString(){
-    return file.getName();
+        return file.getName();
     }
 }
 

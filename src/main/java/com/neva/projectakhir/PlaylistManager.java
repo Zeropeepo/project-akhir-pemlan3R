@@ -1,53 +1,99 @@
 package com.neva.projectakhir;
 
 import java.util.ArrayList;
-
+import java.util.List;
 
 public class PlaylistManager {
-    private ArrayList<Song> playlist= new ArrayList<Song>();
-    int index=0;
+    private List<Song> playlist;
+    private int currentIndex;
 
-    public void addSong(Song song){
-        playlist.addLast(song);
+    private static PlaylistManager instance = new PlaylistManager();
+
+    public static PlaylistManager getInstance() {
+        return instance;
     }
 
-    public void removeSong(Song song){
-        playlist.remove(song);
+    private PlaylistManager() {
+        playlist = new ArrayList<>();
+        currentIndex = -1;
     }
 
-    
-    public void moveUp(int index){
-        if (index-1<0){
-            System.out.println("Tidak ada lagu dalam playlist.");
-        } else {
-            index -= 1;
+    public void addSong(Song song) {
+        playlist.add(song);
+        if (currentIndex == -1) {
+            currentIndex = 0;
         }
     }
 
-    public void moveDown(int index){
-        index += 1;
+    public void removeSong(Song song) {
+        int removedIndex = playlist.indexOf(song);
+        if (removedIndex != -1) {
+            playlist.remove(removedIndex);
+            if (playlist.isEmpty()) {
+                currentIndex = -1;
+            } else if (removedIndex <= currentIndex) {
+                currentIndex = Math.max(0, currentIndex - 1);
+            }
+        }
     }
 
-    public Song getCurrentSong(){
-        Song currentSong = playlist.get(index);
-        return currentSong;
-    }
-    public Song getSongbyIndex(int n){
-    Song currentSong = playlist.get(n);
-        return currentSong;
-    }
-    
-    public Song getNextSong(){
-        Song nextSong = playlist.get(index+1);
-        return nextSong;
+    public void moveUp() {
+        if (currentIndex > 0) {
+            currentIndex--;
+        } else {
+            System.out.println("Sudah di lagu pertama.");
+        }
     }
 
-    public Song getPreviousSong(){
-        Song previousSong = playlist.get(index-1);
-        return previousSong;
+    public void moveDown() {
+        if (currentIndex < playlist.size() - 1) {
+            currentIndex++;
+        } else {
+            System.out.println("Sudah di lagu terakhir.");
+        }
     }
 
-    public ArrayList<Song> getPlaylist(){
+    public Song getCurrentSong() {
+        if (currentIndex >= 0 && currentIndex < playlist.size()) {
+            return playlist.get(currentIndex);
+        }
+        return null;
+    }
+
+    public Song getSongbyIndex(int currentIndex) {
+        if (currentIndex >= 0 && currentIndex < playlist.size()) {
+            return playlist.get(currentIndex);
+        }
+        return null;
+    }
+
+    public Song findSongByTitle(String title) {
+        for (Song song : playlist) {
+            if (song.getName().equals(title)) {
+                return song;
+            }
+        }
+        return null;
+    }
+
+    public Song getNextSong() {
+        if (currentIndex + 1 < playlist.size()) {
+            return playlist.get(currentIndex + 1);
+        }
+        return null;
+    }
+
+    public Song getPreviousSong() {
+        if (currentIndex - 1 >= 0) {
+            return playlist.get(currentIndex - 1);
+        }
+        return null;
+    }
+
+    public List<Song> getPlaylist() {
         return playlist;
     }
-}
+
+    public int getCurrentIndex() {
+        return currentIndex;
+    }
