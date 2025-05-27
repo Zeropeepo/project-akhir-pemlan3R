@@ -97,3 +97,4 @@ public class PlaylistManager {
     public int getCurrentIndex() {
         return currentIndex;
     }
+}
