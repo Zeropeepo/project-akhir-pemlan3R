@@ -277,14 +277,14 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="previousBtn" min="-2" max="-2" attributes="0"/>
+                              <Component id="previousButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
                               <Component id="playButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="Pause" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="stopButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="201" max="32767" attributes="0"/>
                               <Component id="skipButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
@@ -316,7 +316,7 @@
                                       <Component id="Pause" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="stopButton" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="skipButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="previousBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="previousButton" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="volumeSlider" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -435,12 +435,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="skipButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="previousBtn">
+            <Component class="javax.swing.JButton" name="previousButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Previous"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="previousBtnActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="previousButtonActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

@@ -1,5 +1,6 @@
 package com.neva.projectakhir;
 
+
 import com.neva.projectakhir.AudioPlayer;
 import javazoom.jl.player.Player;
 import javax.swing.*;
@@ -101,7 +102,7 @@ public class HomePanel extends javax.swing.JFrame {
         totalTimeLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         skipButton = new javax.swing.JButton();
-        previousBtn = new javax.swing.JButton();
+        previousButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         PlaylistHistory = new javax.swing.JList<>();
         PlaySelected = new javax.swing.JButton();
@@ -250,10 +251,10 @@ public class HomePanel extends javax.swing.JFrame {
             }
         });
 
-        previousBtn.setText("Previous");
-        previousBtn.addActionListener(new java.awt.event.ActionListener() {
+        previousButton.setText("Previous");
+        previousButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                previousBtnActionPerformed(evt);
+                previousButtonActionPerformed(evt);
             }
         });
 
@@ -277,14 +278,14 @@ public class HomePanel extends javax.swing.JFrame {
                         .addGap(224, 224, 224))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(previousBtn)
+                        .addComponent(previousButton)
                         .addGap(113, 113, 113)
                         .addComponent(playButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Pause)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(stopButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
                         .addComponent(skipButton)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
@@ -311,7 +312,7 @@ public class HomePanel extends javax.swing.JFrame {
                                 .addComponent(Pause)
                                 .addComponent(stopButton)
                                 .addComponent(skipButton)
-                                .addComponent(previousBtn))
+                                .addComponent(previousButton))
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(volumeSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel3)))
@@ -536,7 +537,7 @@ public class HomePanel extends javax.swing.JFrame {
             if (!AudioPlayer.isPlaying()) {
                 AudioPlayer.start();
                 progressTimer.start();
-                // Optionally, add a listener for when the clip ends
+                // Listener when the clip ends
                 AudioPlayer.getClip().addLineListener(new LineListener() {
                     @Override
                     public void update(LineEvent event) {
@@ -575,6 +576,7 @@ public class HomePanel extends javax.swing.JFrame {
 
         AudioPlayer.stop();
         int indexnya = PlaylistHistory.getSelectedIndex();
+        PlaylistManager.getInstance().setCurrentIndex(indexnya);
         // Get the selected file
         File filenya=playlistManager.getInstance().getSongbyIndex(indexnya).getFile();
         audioFile = filenya;
@@ -702,7 +704,8 @@ public class HomePanel extends javax.swing.JFrame {
 
     private void playFromPlaylistBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playFromPlaylistBtnActionPerformed
         int selectedIndex = jPlaylist1.getSelectedIndex();
-
+        PlaylistManager.getInstance().setCurrentIndex(selectedIndex);
+        
     if (selectedIndex != -1) {
         String songTitle = playlistModel.getElementAt(selectedIndex);
         Song selectedSong = playlistManager.findSongByTitle(songTitle);
@@ -780,11 +783,51 @@ public class HomePanel extends javax.swing.JFrame {
             currentPositionInSeconds = newPositionInSeconds;
             updateTimeLabels();
     }//GEN-LAST:event_progressBarMouseClicked
-
-    private void previousBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_previousBtnActionPerformed
 }
+    
+    private void previousButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousButtonActionPerformed
+        Song previousSong = playlistManager.getInstance().getPreviousSong();
+        if (previousSong == null) {
+            JOptionPane.showMessageDialog(this, "Tidak ada lagu sebelumnya");
+            return;
+        }
+
+        try {
+            // Stop audio saat ini jika sedang diputar
+            if (AudioPlayer.getClip() != null && AudioPlayer.getClip().isOpen()) {
+                AudioPlayer.stop();
+            }
+
+            // Load lagu berikutnya
+            File songFile = previousSong.getFile();
+            AudioPlayer.loadAudio(songFile);
+            audioFile = songFile; // Simpan referensi untuk HomePanel
+            currentSongName = previousSong.getName();
+            songNameLabel.setText(currentSongName);
+
+            // Volume control
+            if (AudioPlayer.getClip().isControlSupported(FloatControl.Type.MASTER_GAIN)) {
+                volumeControl = (FloatControl) AudioPlayer.getClip().getControl(FloatControl.Type.MASTER_GAIN);
+                adjustVolume();
+            }
+
+            // Atur durasi dan progress bar
+            songDurationInSeconds = (int) (AudioPlayer.getClip().getMicrosecondLength() / 1_000_000);
+            progressBar.setMaximum(songDurationInSeconds);
+            updateTimeLabels();
+
+            // Update selection di JList
+            jPlaylist1.setSelectedValue(previousSong, true);
+
+            // Play lagu
+            AudioPlayer.start();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Gagal memuat lagu: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_previousButtonActionPerformed
+
 
     private void refreshPlaylist() {
         playlistModel.clear();
@@ -846,7 +889,7 @@ public class HomePanel extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton playButton;
     private javax.swing.JButton playFromPlaylistBtn;
-    private javax.swing.JButton previousBtn;
+    private javax.swing.JButton previousButton;
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JButton removeSongButton;
     private javax.swing.JButton skipButton;

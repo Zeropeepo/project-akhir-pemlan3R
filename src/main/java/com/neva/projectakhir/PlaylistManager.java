@@ -78,14 +78,16 @@ public class PlaylistManager {
 
     public Song getNextSong() {
         if (currentIndex + 1 < playlist.size()) {
-            return playlist.get(currentIndex + 1);
+            currentIndex++;
+            return playlist.get(currentIndex);
         }
         return null;
     }
 
     public Song getPreviousSong() {
         if (currentIndex - 1 >= 0) {
-            return playlist.get(currentIndex - 1);
+            currentIndex--;
+            return playlist.get(currentIndex);
         }
         return null;
     }
@@ -96,5 +98,11 @@ public class PlaylistManager {
 
     public int getCurrentIndex() {
         return currentIndex;
+    }
+    
+    public void setCurrentIndex(int index){
+        if(index >= 0 && index < playlist.size()){
+            this.currentIndex = index;
+        }
     }
 }
