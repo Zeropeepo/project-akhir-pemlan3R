@@ -50,4 +50,11 @@ public class PlaylistManager {
     public ArrayList<Song> getPlaylist(){
         return playlist;
     }
+<<<<<<< Updated upstream
 }
+=======
+
+    public int getCurrentIndex() {
+        return currentIndex;
+    }}
+>>>>>>> Stashed changes

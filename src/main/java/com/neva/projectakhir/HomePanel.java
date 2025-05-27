@@ -231,6 +231,7 @@ public class HomePanel extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
+<<<<<<< Updated upstream
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 266, Short.MAX_VALUE)
                         .addComponent(playButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -243,6 +244,8 @@ public class HomePanel extends javax.swing.JFrame {
                         .addComponent(volumeSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18))
                     .addGroup(jPanel5Layout.createSequentialGroup()
+=======
+>>>>>>> Stashed changes
                         .addGap(43, 43, 43)
                         .addComponent(currentTimeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -251,7 +254,25 @@ public class HomePanel extends javax.swing.JFrame {
                             .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(totalTimeLabel)
+<<<<<<< Updated upstream
                         .addGap(224, 224, 224))))
+=======
+                        .addGap(224, 224, 224))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(206, 206, 206)
+                        .addComponent(playButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Pause)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(stopButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(skipButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(volumeSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))))
+>>>>>>> Stashed changes
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,12 +291,21 @@ public class HomePanel extends javax.swing.JFrame {
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(playButton)
                                 .addComponent(Pause)
+<<<<<<< Updated upstream
                                 .addComponent(stopButton))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(volumeSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3))
                                 .addGap(11, 11, 11))))
+=======
+                                .addComponent(stopButton)
+                                .addComponent(skipButton))
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(volumeSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3)))
+                        .addGap(10, 10, 10))
+>>>>>>> Stashed changes
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -307,16 +337,41 @@ public class HomePanel extends javax.swing.JFrame {
                     .addComponent(songButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(browseButton, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE))
+<<<<<<< Updated upstream
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+=======
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(90, 90, 90)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(61, 61, 61))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+>>>>>>> Stashed changes
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
                             .addComponent(PlaySelected, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(41, 41, 41))
+<<<<<<< Updated upstream
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(61, 61, 61))))
+=======
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(112, 112, 112)
+                        .addComponent(addSongButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(removeSongButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(playFromPlaylistBtn)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+>>>>>>> Stashed changes
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -325,12 +380,33 @@ public class HomePanel extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+<<<<<<< Updated upstream
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+=======
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(songButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(35, 35, 35))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(removeSongButton)
+                            .addComponent(addSongButton)
+                            .addComponent(playFromPlaylistBtn))
+                        .addGap(0, 23, Short.MAX_VALUE))
+>>>>>>> Stashed changes
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(90, 90, 90)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+<<<<<<< Updated upstream
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -342,6 +418,13 @@ public class HomePanel extends javax.swing.JFrame {
                         .addComponent(PlaySelected, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
                         .addGap(68, 68, 68)))
                 .addComponent(browseButton, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+=======
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(PlaySelected, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(68, 68, 68)
+                        .addComponent(browseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+>>>>>>> Stashed changes
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -357,7 +440,11 @@ public class HomePanel extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< Updated upstream
             .addGroup(layout.createSequentialGroup()
+=======
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+>>>>>>> Stashed changes
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -379,13 +466,38 @@ public class HomePanel extends javax.swing.JFrame {
         int returnVal = fileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             try {
-                // Stop any currently playing audio
+                loadlogicManager(fileChooser.getSelectedFile());
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+                JOptionPane.showMessageDialog(this,
+                        "Error loading audio file: " + ex.getMessage(),
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                ex.printStackTrace();
+            }
+        }
+
+
+        try {
+            playlistManager.getInstance().addSong(new Song(fileChooser.getSelectedFile()));
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(HomePanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(HomePanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (LineUnavailableException ex) {
+            Logger.getLogger(HomePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+
+    }//GEN-LAST:event_browseButtonActionPerformed
+
+    private void loadlogicManager(File songinserted) throws UnsupportedAudioFileException , IOException, LineUnavailableException {
+     // Stop any currently playing audio
                 if (AudioPlayer.getClip() != null && AudioPlayer.getClip().isOpen()) {
                     AudioPlayer.stop();
                 }
                 
                 // Get the selected file
-                audioFile = fileChooser.getSelectedFile();
+                audioFile = songinserted;
                 AudioPlayer.loadAudio(audioFile);
                 currentSongName = audioFile.getName();
                 songNameLabel.setText(currentSongName);
@@ -403,6 +515,7 @@ public class HomePanel extends javax.swing.JFrame {
                 
                 // Play automatically
                 playButton.doClick();
+<<<<<<< Updated upstream
             } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
                 JOptionPane.showMessageDialog(this, 
                     "Error loading audio file: " + ex.getMessage(), 
@@ -433,6 +546,20 @@ PlaylistHistory.setModel(history);
         
     }//GEN-LAST:event_browseButtonActionPerformed
 
+=======
+                updateHistory();
+    }
+    
+    
+    
+    private void updateHistory(){
+     history.clear();
+        history.addAll(playlistManager.getInstance().getPlaylist());
+        //history.addElement(AudioPlayer.getFile().getName());
+        PlaylistHistory.setModel(history);
+    }
+    
+>>>>>>> Stashed changes
     private void PauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PauseActionPerformed
         if (AudioPlayer.getClip() != null && AudioPlayer.isPlaying()) {
             AudioPlayer.pause();
@@ -519,6 +646,132 @@ PlaylistHistory.setModel(history);
         
     }//GEN-LAST:event_PlaySelectedActionPerformed
 
+<<<<<<< Updated upstream
+=======
+    private void addSongButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSongButtonActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "Audio Files", "wav", "aiff", "au");
+        fileChooser.setFileFilter(filter);
+
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File songFile = fileChooser.getSelectedFile();
+
+            try {
+                Song newSong = new Song(songFile);
+                playlistManager.getInstance().addSong(newSong);
+                playlistModel.addElement(newSong.getName());
+                refreshPlaylist();
+
+                jPlaylist1.setSelectedIndex(playlistManager.getInstance().getPlaylist().size() - 1);
+
+
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+                JOptionPane.showMessageDialog(this,
+                        "Gagal menambahkan atau memutar lagu: " + ex.getMessage(),
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_addSongButtonActionPerformed
+
+    private void removeSongButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeSongButtonActionPerformed
+        int selectedIndex = jPlaylist1.getSelectedIndex();
+        if (selectedIndex != -1) {
+
+            String songTitle = playlistModel.getElementAt(selectedIndex);
+            Song songToRemove = playlistManager.findSongByTitle(songTitle);
+
+            if (AudioPlayer.getFile() != null && AudioPlayer.getFile().equals(songToRemove.getFile())) {
+                AudioPlayer.stop();
+            }
+
+            playlistManager.removeSong(songToRemove);
+            playlistModel.removeElementAt(selectedIndex);
+
+            progressBar.setValue(0);
+        } else {
+            JOptionPane.showMessageDialog(this, "Pilih lagu yang ingin dihapus.");
+        }
+    }//GEN-LAST:event_removeSongButtonActionPerformed
+
+    private void skipButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skipButtonActionPerformed
+        Song nextSong = playlistManager.getInstance().getNextSong();
+        if (nextSong == null) {
+            JOptionPane.showMessageDialog(this, "Tidak ada lagu berikutnya dalam playlist.");
+            return;
+        }
+
+        try {
+            // Stop audio saat ini jika sedang diputar
+            if (AudioPlayer.getClip() != null && AudioPlayer.getClip().isOpen()) {
+                AudioPlayer.stop();
+            }
+
+            // Load lagu berikutnya
+            File songFile = nextSong.getFile();
+            AudioPlayer.loadAudio(songFile);
+            audioFile = songFile; // Simpan referensi untuk HomePanel
+            currentSongName = nextSong.getName();
+            songNameLabel.setText(currentSongName);
+
+            // Volume control
+            if (AudioPlayer.getClip().isControlSupported(FloatControl.Type.MASTER_GAIN)) {
+                volumeControl = (FloatControl) AudioPlayer.getClip().getControl(FloatControl.Type.MASTER_GAIN);
+                adjustVolume();
+            }
+
+            // Atur durasi dan progress bar
+            songDurationInSeconds = (int) (AudioPlayer.getClip().getMicrosecondLength() / 1_000_000);
+            progressBar.setMaximum(songDurationInSeconds);
+            updateTimeLabels();
+
+            // Update selection di JList
+            jPlaylist1.setSelectedValue(nextSong, true);
+
+            // Play lagu
+            AudioPlayer.start();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Gagal memuat lagu: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_skipButtonActionPerformed
+
+    private void playFromPlaylistBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playFromPlaylistBtnActionPerformed
+        int selectedIndex = jPlaylist1.getSelectedIndex();
+
+        if (selectedIndex != -1) {
+            String songTitle = playlistModel.getElementAt(selectedIndex);
+            Song selectedSong = playlistManager.findSongByTitle(songTitle);
+
+            if (selectedSong == null) {
+                JOptionPane.showMessageDialog(this, "Lagu tidak ditemukan di data playlist.");
+                return;
+            }
+
+            File songFile = selectedSong.getFile();
+
+            try {
+                loadlogicManager(songFile);
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Gagal memutar lagu: " + ex.getMessage());
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Pilih lagu dari playlist.");
+        }
+    }//GEN-LAST:event_playFromPlaylistBtnActionPerformed
+
+
+    private void refreshPlaylist() {
+        playlistModel.clear();
+        for (Song song : PlaylistManager.getInstance().getPlaylist()) {
+            playlistModel.addElement(song.getName());
+        }
+    }
+>>>>>>> Stashed changes
 
     
     
