@@ -232,6 +232,7 @@ public class HomePanel extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 266, Short.MAX_VALUE)
                         .addComponent(playButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -246,6 +247,8 @@ public class HomePanel extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
                         .addGap(43, 43, 43)
                         .addComponent(currentTimeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -255,8 +258,11 @@ public class HomePanel extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(totalTimeLabel)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                         .addGap(224, 224, 224))))
 =======
+=======
+>>>>>>> Stashed changes
                         .addGap(224, 224, 224))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(206, 206, 206)
@@ -272,6 +278,9 @@ public class HomePanel extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(volumeSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18))))
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         );
         jPanel5Layout.setVerticalGroup(
@@ -292,6 +301,7 @@ public class HomePanel extends javax.swing.JFrame {
                                 .addComponent(playButton)
                                 .addComponent(Pause)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                                 .addComponent(stopButton))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -299,12 +309,17 @@ public class HomePanel extends javax.swing.JFrame {
                                     .addComponent(jLabel3))
                                 .addGap(11, 11, 11))))
 =======
+=======
+>>>>>>> Stashed changes
                                 .addComponent(stopButton)
                                 .addComponent(skipButton))
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(volumeSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel3)))
                         .addGap(10, 10, 10))
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -338,10 +353,13 @@ public class HomePanel extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(browseButton, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE))
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
 =======
+=======
+>>>>>>> Stashed changes
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(90, 90, 90)
@@ -353,16 +371,22 @@ public class HomePanel extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
                             .addComponent(PlaySelected, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(41, 41, 41))
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(61, 61, 61))))
 =======
+=======
+>>>>>>> Stashed changes
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(112, 112, 112)
                         .addComponent(addSongButton)
@@ -371,6 +395,9 @@ public class HomePanel extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(playFromPlaylistBtn)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -381,9 +408,12 @@ public class HomePanel extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
 =======
+=======
+>>>>>>> Stashed changes
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
@@ -401,11 +431,15 @@ public class HomePanel extends javax.swing.JFrame {
                             .addComponent(addSongButton)
                             .addComponent(playFromPlaylistBtn))
                         .addGap(0, 23, Short.MAX_VALUE))
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(90, 90, 90)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -419,11 +453,16 @@ public class HomePanel extends javax.swing.JFrame {
                         .addGap(68, 68, 68)))
                 .addComponent(browseButton, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
 =======
+=======
+>>>>>>> Stashed changes
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(PlaySelected, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(68, 68, 68)
                         .addComponent(browseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -441,7 +480,11 @@ public class HomePanel extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             .addGroup(layout.createSequentialGroup()
+=======
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+>>>>>>> Stashed changes
 =======
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
 >>>>>>> Stashed changes
@@ -495,23 +538,36 @@ public class HomePanel extends javax.swing.JFrame {
                 if (AudioPlayer.getClip() != null && AudioPlayer.getClip().isOpen()) {
                     AudioPlayer.stop();
                 }
+<<<<<<< Updated upstream
                 
+=======
+
+>>>>>>> Stashed changes
                 // Get the selected file
                 audioFile = songinserted;
                 AudioPlayer.loadAudio(audioFile);
                 currentSongName = audioFile.getName();
                 songNameLabel.setText(currentSongName);
+<<<<<<< Updated upstream
                 
+=======
+
+>>>>>>> Stashed changes
                 // Set up the volume control
                 if (AudioPlayer.getClip().isControlSupported(FloatControl.Type.MASTER_GAIN)) {
                     volumeControl = (FloatControl) AudioPlayer.getClip().getControl(FloatControl.Type.MASTER_GAIN);
                     adjustVolume();
                 }
+<<<<<<< Updated upstream
                 
+=======
+
+>>>>>>> Stashed changes
                 // Calculate duration
                 songDurationInSeconds = (int)(AudioPlayer.getClip().getMicrosecondLength() / 1000000);
                 progressBar.setMaximum(songDurationInSeconds);
                 updateTimeLabels();
+<<<<<<< Updated upstream
                 
                 // Play automatically
                 playButton.doClick();
@@ -547,6 +603,11 @@ PlaylistHistory.setModel(history);
     }//GEN-LAST:event_browseButtonActionPerformed
 
 =======
+=======
+
+                // Play automatically
+                playButton.doClick();
+>>>>>>> Stashed changes
                 updateHistory();
     }
     
@@ -559,6 +620,9 @@ PlaylistHistory.setModel(history);
         PlaylistHistory.setModel(history);
     }
     
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     private void PauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PauseActionPerformed
         if (AudioPlayer.getClip() != null && AudioPlayer.isPlaying()) {

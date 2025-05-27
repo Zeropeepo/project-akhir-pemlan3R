@@ -57,4 +57,7 @@ public class PlaylistManager {
     public int getCurrentIndex() {
         return currentIndex;
     }}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
