@@ -7,7 +7,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.*;
@@ -25,7 +30,7 @@ public class HomePanel extends javax.swing.JFrame {
     private DefaultListModel history = new DefaultListModel();
     private PlaylistManager playlistManager = PlaylistManager.getInstance();
     private DefaultListModel<String> playlistModel = new DefaultListModel<>();
-
+    private ArrayList<Song> historyarray = new ArrayList<>();
 
     public HomePanel() {
         jPanel1 = new javax.swing.JPanel();
@@ -115,6 +120,14 @@ public class HomePanel extends javax.swing.JFrame {
         playFromPlaylistBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -464,6 +477,15 @@ public class HomePanel extends javax.swing.JFrame {
 
     private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
         JFileChooser fileChooser = new JFileChooser();
+
+        // Set default directory to Windows Music folder or fallback
+        String musicDir = System.getProperty("user.home") + File.separator + "Music";
+        File defaultDir = new File(musicDir);
+        if (!defaultDir.exists() || !defaultDir.isDirectory()) {
+            defaultDir = new File(System.getProperty("user.home"));
+        }
+        fileChooser.setCurrentDirectory(defaultDir);
+
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
                 "Audio Files", "wav", "aiff", "au");
         fileChooser.setFileFilter(filter);
@@ -502,12 +524,13 @@ public class HomePanel extends javax.swing.JFrame {
                 ex.printStackTrace();
             }
         }
+    }//GEN-LAST:event_browseButtonActionPerformed
 
 
 
-
-        try {
-            playlistManager.getInstance().addSong(new Song(fileChooser.getSelectedFile()));
+    private void historyUpdater(File tempfilehistory){
+       try {
+            historyarray.add(new Song(tempfilehistory));
         } catch (UnsupportedAudioFileException ex) {
             Logger.getLogger(HomePanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -517,13 +540,10 @@ public class HomePanel extends javax.swing.JFrame {
         }
 
         history.clear();
-        history.addAll(playlistManager.getInstance().getPlaylist());
+        history.addAll(historyarray);
         //history.addElement(AudioPlayer.getFile().getName());
         PlaylistHistory.setModel(history);
-
-
-
-    }//GEN-LAST:event_browseButtonActionPerformed
+}
 
     private void PauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PauseActionPerformed
         if (AudioPlayer.getClip() != null && AudioPlayer.isPlaying()) {
@@ -614,6 +634,15 @@ public class HomePanel extends javax.swing.JFrame {
 
     private void addSongButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSongButtonActionPerformed
         JFileChooser fileChooser = new JFileChooser();
+
+        // Set default directory to Windows Music folder or fallback
+        String musicDir = System.getProperty("user.home") + File.separator + "Music";
+        File defaultDir = new File(musicDir);
+        if (!defaultDir.exists() || !defaultDir.isDirectory()) {
+            defaultDir = new File(System.getProperty("user.home"));
+        }
+        fileChooser.setCurrentDirectory(defaultDir);
+
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
                 "Audio Files", "wav", "aiff", "au");
         fileChooser.setFileFilter(filter);
@@ -678,7 +707,7 @@ public class HomePanel extends javax.swing.JFrame {
             audioFile = songFile; // Simpan referensi untuk HomePanel
             currentSongName = nextSong.getName();
             songNameLabel.setText(currentSongName);
-
+            jPlaylist1.setSelectedIndex(playlistManager.getCurrentIndex());
             // Volume control
             if (AudioPlayer.getClip().isControlSupported(FloatControl.Type.MASTER_GAIN)) {
                 volumeControl = (FloatControl) AudioPlayer.getClip().getControl(FloatControl.Type.MASTER_GAIN);
@@ -742,7 +771,8 @@ public class HomePanel extends javax.swing.JFrame {
             }
 
             songNameLabel.setText(selectedSong.getName());
-
+            historyUpdater(songFile);
+            
             
             AudioPlayer.getClip().addLineListener(new LineListener() {
                 @Override
@@ -804,6 +834,7 @@ public class HomePanel extends javax.swing.JFrame {
             audioFile = songFile; // Simpan referensi untuk HomePanel
             currentSongName = previousSong.getName();
             songNameLabel.setText(currentSongName);
+            jPlaylist1.setSelectedIndex(playlistManager.getCurrentIndex());
 
             // Volume control
             if (AudioPlayer.getClip().isControlSupported(FloatControl.Type.MASTER_GAIN)) {
@@ -827,6 +858,59 @@ public class HomePanel extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_previousButtonActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        
+            File file = new File("DataUser.txt");
+
+        try(FileWriter fw = new FileWriter(file, false)){ // false = overwrite
+            for (Song s : playlistManager.getPlaylist()) {
+                fw.write(s.getFile().getAbsolutePath() + "\n");
+            }
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        refreshPlaylist();
+
+
+        
+    }//GEN-LAST:event_formWindowClosing
+
+    
+    
+    boolean PlaylistLoaded=false;
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        
+        
+        if (PlaylistLoaded) {
+            return;
+        }
+        PlaylistLoaded = true;
+        System.out.println("Load txt");
+        File file = new File("DataUser.txt");
+
+        try(FileReader fr = new FileReader(file)){
+            Scanner sc = new Scanner(fr);
+            var playlistpointer=playlistManager.getPlaylist();
+            while (sc.hasNextLine()) {
+                try{
+                playlistpointer.add(new Song(new File(sc.nextLine())));}
+                catch (FileNotFoundException e){
+                    JOptionPane.showConfirmDialog(this, "Saved song not found: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
+            throw new RuntimeException(e);
+        }
+
+        refreshPlaylist();
+
+
+        
+    }//GEN-LAST:event_formWindowActivated
 
 
     private void refreshPlaylist() {
