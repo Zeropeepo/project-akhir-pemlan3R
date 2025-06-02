@@ -107,7 +107,10 @@ public class HomePanel extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         skipButton = new javax.swing.JButton();
         previousButton = new javax.swing.JButton();
+<<<<<<< HEAD
         jPanel6 = jPanel6 = new com.neva.projectakhir.GradientPanel(new java.awt.Color(24, 24, 24), new java.awt.Color(22, 22, 22), com.neva.projectakhir.GradientPanel.VERTICAL);
+=======
+>>>>>>> 4bf164c7703660390ae416cf3b4f8508295ea21f
         jScrollPane1 = new javax.swing.JScrollPane();
         PlaylistHistory = new javax.swing.JList<>();
         PlaySelected = new javax.swing.JButton();
@@ -267,7 +270,10 @@ public class HomePanel extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< HEAD
         previousButton.setFont(new java.awt.Font("OCR A Extended", 0, 12)); // NOI18N
+=======
+>>>>>>> 4bf164c7703660390ae416cf3b4f8508295ea21f
         previousButton.setText("Previous");
         previousButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -307,15 +313,25 @@ public class HomePanel extends javax.swing.JFrame {
                         .addComponent(totalTimeLabel)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
+<<<<<<< HEAD
                         .addGap(36, 36, 36)
                         .addComponent(previousButton)
                         .addGap(145, 145, 145)
+=======
+                        .addGap(18, 18, 18)
+                        .addComponent(previousButton)
+                        .addGap(113, 113, 113)
+>>>>>>> 4bf164c7703660390ae416cf3b4f8508295ea21f
                         .addComponent(playButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Pause)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(stopButton)
+<<<<<<< HEAD
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
+=======
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
+>>>>>>> 4bf164c7703660390ae416cf3b4f8508295ea21f
                         .addComponent(skipButton)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
@@ -873,7 +889,11 @@ public class HomePanel extends javax.swing.JFrame {
 
         
     }//GEN-LAST:event_formWindowActivated
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 4bf164c7703660390ae416cf3b4f8508295ea21f
 
     private void refreshPlaylist() {
         playlistModel.clear();
