@@ -107,10 +107,8 @@ public class HomePanel extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         skipButton = new javax.swing.JButton();
         previousButton = new javax.swing.JButton();
-<<<<<<< HEAD
         jPanel6 = jPanel6 = new com.neva.projectakhir.GradientPanel(new java.awt.Color(24, 24, 24), new java.awt.Color(22, 22, 22), com.neva.projectakhir.GradientPanel.VERTICAL);
-=======
->>>>>>> 4bf164c7703660390ae416cf3b4f8508295ea21f
+        loopButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         PlaylistHistory = new javax.swing.JList<>();
         PlaySelected = new javax.swing.JButton();
@@ -270,10 +268,7 @@ public class HomePanel extends javax.swing.JFrame {
             }
         });
 
-<<<<<<< HEAD
         previousButton.setFont(new java.awt.Font("OCR A Extended", 0, 12)); // NOI18N
-=======
->>>>>>> 4bf164c7703660390ae416cf3b4f8508295ea21f
         previousButton.setText("Previous");
         previousButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -294,6 +289,13 @@ public class HomePanel extends javax.swing.JFrame {
             .addGap(0, 87, Short.MAX_VALUE)
         );
 
+        loopButton.setText("Loop");
+        loopButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loopButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -311,27 +313,19 @@ public class HomePanel extends javax.swing.JFrame {
                             .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(totalTimeLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(loopButton)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-<<<<<<< HEAD
                         .addGap(36, 36, 36)
                         .addComponent(previousButton)
                         .addGap(145, 145, 145)
-=======
-                        .addGap(18, 18, 18)
-                        .addComponent(previousButton)
-                        .addGap(113, 113, 113)
->>>>>>> 4bf164c7703660390ae416cf3b4f8508295ea21f
                         .addComponent(playButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Pause)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(stopButton)
-<<<<<<< HEAD
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
-=======
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
->>>>>>> 4bf164c7703660390ae416cf3b4f8508295ea21f
                         .addComponent(skipButton)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
@@ -349,8 +343,10 @@ public class HomePanel extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(totalTimeLabel)
-                            .addComponent(currentTimeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE))
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(totalTimeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(loopButton))
+                            .addComponent(currentTimeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -889,11 +885,20 @@ public class HomePanel extends javax.swing.JFrame {
 
         
     }//GEN-LAST:event_formWindowActivated
-<<<<<<< HEAD
     
-=======
+    private boolean isLooping = false;
+    private void loopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loopButtonActionPerformed
+        isLooping = !isLooping;
+        if(isLooping){
+            loopButton.setText("Loop:ON");
+            loopButton.setBackground(new Color(30,215,96));
+            loopButton.setForeground(new Color(255,255,255));
+        } else{
+            loopButton.setText("Loop:OFF");
+            loopButton.setBackground(UIManager.getColor("Button.background"));
+        }
+    }//GEN-LAST:event_loopButtonActionPerformed
 
->>>>>>> 4bf164c7703660390ae416cf3b4f8508295ea21f
 
     private void refreshPlaylist() {
         playlistModel.clear();
@@ -953,6 +958,7 @@ public class HomePanel extends javax.swing.JFrame {
     private javax.swing.JList<String> jPlaylist1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton loopButton;
     private javax.swing.JButton playButton;
     private javax.swing.JButton playFromPlaylistBtn;
     private javax.swing.JButton previousButton;

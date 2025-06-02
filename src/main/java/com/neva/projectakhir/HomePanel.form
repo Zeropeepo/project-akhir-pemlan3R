@@ -231,28 +231,20 @@
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="totalTimeLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="loopButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-<<<<<<< HEAD
                               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                               <Component id="previousButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
-=======
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="previousButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
->>>>>>> 4bf164c7703660390ae416cf3b4f8508295ea21f
                               <Component id="playButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="Pause" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="stopButton" min="-2" max="-2" attributes="0"/>
-<<<<<<< HEAD
                               <EmptySpace pref="236" max="32767" attributes="0"/>
-=======
-                              <EmptySpace pref="201" max="32767" attributes="0"/>
->>>>>>> 4bf164c7703660390ae416cf3b4f8508295ea21f
                               <Component id="skipButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
@@ -274,8 +266,11 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="progressBar" max="32767" attributes="0"/>
-                                  <Component id="totalTimeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="currentTimeLabel" alignment="0" pref="27" max="32767" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                      <Component id="totalTimeLabel" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="loopButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="currentTimeLabel" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -436,6 +431,14 @@
                 </DimensionLayout>
               </Layout>
             </Container>
+            <Component class="javax.swing.JButton" name="loopButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Loop"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="loopButtonActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
