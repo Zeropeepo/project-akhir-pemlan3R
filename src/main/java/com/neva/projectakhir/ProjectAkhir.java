@@ -1,12 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package com.neva.projectakhir;
 
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-
+import javax.swing.UnsupportedLookAndFeelException;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 /**
  *
  * @author Rimba Nevada
@@ -14,7 +12,15 @@ import javax.swing.UIManager;
 public class ProjectAkhir {
 
     public static void main(String[] args) {
-     SwingUtilities.invokeLater(() -> {
-            new HomePanel().setVisible(true);});
-       }
+        try{
+        UIManager.setLookAndFeel(new FlatMacLightLaf());
+        }
+        
+        catch(UnsupportedLookAndFeelException ex){
+            System.err.println("Failed to load theme");
+        }
+        SwingUtilities.invokeLater(() -> {
+            new HomePanel().setVisible(true);
+        });
+    }
 }
