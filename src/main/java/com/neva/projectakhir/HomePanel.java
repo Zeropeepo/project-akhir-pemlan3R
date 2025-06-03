@@ -560,6 +560,8 @@ public class HomePanel extends javax.swing.JFrame {
                                 progressBar.setValue(0);
                                 currentPositionInSeconds = 0;
                                 updateTimeLabels();
+                                skipButtonActionPerformed(null);
+
                             }
                         }
                     }
