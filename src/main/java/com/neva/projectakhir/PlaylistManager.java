@@ -39,7 +39,11 @@ public class PlaylistManager {
 
     public void moveUp() {
         if (currentIndex > 0) {
-            currentIndex--;
+            // Swap current song with the previous song
+            Song temp = playlist.get(currentIndex - 1);
+            playlist.set(currentIndex - 1, playlist.get(currentIndex));
+            playlist.set(currentIndex, temp);
+            currentIndex = currentIndex - 1;
         } else {
             System.out.println("Sudah di lagu pertama.");
         }
@@ -47,7 +51,11 @@ public class PlaylistManager {
 
     public void moveDown() {
         if (currentIndex < playlist.size() - 1) {
-            currentIndex++;
+            // Swap current song with the next song
+            Song temp = playlist.get(currentIndex + 1);
+            playlist.set(currentIndex + 1, playlist.get(currentIndex));
+            playlist.set(currentIndex, temp);
+            currentIndex = currentIndex + 1;
         } else {
             System.out.println("Sudah di lagu terakhir.");
         }

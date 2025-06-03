@@ -117,8 +117,11 @@ public class HomePanel extends javax.swing.JFrame {
         jPlaylist1 = new javax.swing.JList<>();
         jLabel4 = new javax.swing.JLabel();
         addSongButton = new javax.swing.JButton();
+        btnMoveDOWN = new javax.swing.JButton();
         removeSongButton = new javax.swing.JButton();
         playFromPlaylistBtn = new javax.swing.JButton();
+        addSongButton1 = new javax.swing.JButton();
+        btnMoveUP1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -165,7 +168,6 @@ public class HomePanel extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("      Profile");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -189,7 +191,6 @@ public class HomePanel extends javax.swing.JFrame {
 
         songButton.setBackground(new java.awt.Color(30, 215, 96));
         songButton.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
-        songButton.setForeground(new java.awt.Color(0, 0, 0));
         songButton.setText("Songs");
         songButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -200,7 +201,6 @@ public class HomePanel extends javax.swing.JFrame {
 
         browseButton.setBackground(new java.awt.Color(30, 215, 96));
         browseButton.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
-        browseButton.setForeground(new java.awt.Color(0, 0, 0));
         browseButton.setText("Browse");
         browseButton.setToolTipText("");
         browseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -370,7 +370,6 @@ public class HomePanel extends javax.swing.JFrame {
 
         PlaySelected.setBackground(new java.awt.Color(30, 215, 96));
         PlaySelected.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
-        PlaySelected.setForeground(new java.awt.Color(0, 0, 0));
         PlaySelected.setText("Play Selected");
         PlaySelected.setToolTipText("");
         PlaySelected.addActionListener(new java.awt.event.ActionListener() {
@@ -391,22 +390,22 @@ public class HomePanel extends javax.swing.JFrame {
         jPlaylist1.setSelectionBackground(new java.awt.Color(51, 204, 0));
         jScrollPane2.setViewportView(jPlaylist1);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(377, 128, 395, 326));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, 395, 326));
 
         jLabel4.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Playlist");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(377, 96, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, -1, -1));
 
-        addSongButton.setFont(new java.awt.Font("OCR A Extended", 0, 12)); // NOI18N
-        addSongButton.setText("Add Song");
-        addSongButton.setActionCommand("Add");
-        addSongButton.addActionListener(new java.awt.event.ActionListener() {
+        btnMoveDOWN.setText("Move Down");
+        btnMoveDOWN.setActionCommand("Add");
+        btnMoveDOWN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addSongButtonActionPerformed(evt);
+                btnMoveDOWNActionPerformed(evt);
             }
         });
         jPanel1.add(addSongButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 457, -1, -1));
+        jPanel1.add(btnMoveDOWN, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 260, -1, -1));
 
         removeSongButton.setFont(new java.awt.Font("OCR A Extended", 0, 12)); // NOI18N
         removeSongButton.setText("Remove Song");
@@ -416,7 +415,7 @@ public class HomePanel extends javax.swing.JFrame {
                 removeSongButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(removeSongButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(512, 457, -1, -1));
+        jPanel1.add(removeSongButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 460, -1, -1));
 
         playFromPlaylistBtn.setFont(new java.awt.Font("OCR A Extended", 0, 12)); // NOI18N
         playFromPlaylistBtn.setText("Play Song");
@@ -426,7 +425,27 @@ public class HomePanel extends javax.swing.JFrame {
                 playFromPlaylistBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(playFromPlaylistBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(631, 457, -1, -1));
+        jPanel1.add(playFromPlaylistBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 460, -1, -1));
+
+        addSongButton1.setFont(new java.awt.Font("OCR A Extended", 0, 12)); // NOI18N
+        addSongButton1.setText("Add Song");
+        addSongButton1.setActionCommand("Add");
+        addSongButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addSongButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(addSongButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 460, -1, -1));
+
+        btnMoveUP1.setFont(new java.awt.Font("OCR A Extended", 0, 12)); // NOI18N
+        btnMoveUP1.setText("Move Up");
+        btnMoveUP1.setActionCommand("Add");
+        btnMoveUP1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoveUP1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnMoveUP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 220, 100, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -606,41 +625,14 @@ public class HomePanel extends javax.swing.JFrame {
 
     }//GEN-LAST:event_PlaySelectedActionPerformed
 
-    private void addSongButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSongButtonActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
-
-        // Set default directory to Windows Music folder or fallback
-        String musicDir = System.getProperty("user.home") + File.separator + "Music";
-        File defaultDir = new File(musicDir);
-        if (!defaultDir.exists() || !defaultDir.isDirectory()) {
             defaultDir = new File(System.getProperty("user.home"));
-        }
-        fileChooser.setCurrentDirectory(defaultDir);
-
-        FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                "Audio Files", "wav", "aiff", "au");
-        fileChooser.setFileFilter(filter);
-
-        int result = fileChooser.showOpenDialog(this);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File songFile = fileChooser.getSelectedFile();
-
-            try {
-                Song newSong = new Song(songFile);
-                playlistManager.getInstance().addSong(newSong);
-                playlistModel.addElement(newSong.getName());
-                refreshPlaylist();
-
-                jPlaylist1.setSelectedIndex(playlistManager.getInstance().getPlaylist().size() - 1);
-
-
-            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
-                JOptionPane.showMessageDialog(this,
-                        "Gagal menambahkan atau memutar lagu: " + ex.getMessage(),
-                        "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    }//GEN-LAST:event_addSongButtonActionPerformed
+    private void btnMoveDOWNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveDOWNActionPerformed
+   int current= jPlaylist1.getSelectedIndex(); 
+        playlistManager.setCurrentIndex(current);
+        playlistManager.moveDown();
+       refreshPlaylist(); 
+       jPlaylist1.setSelectedIndex(current+1);
+    }//GEN-LAST:event_btnMoveDOWNActionPerformed
 
     private void removeSongButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeSongButtonActionPerformed
         int selectedIndex = jPlaylist1.getSelectedIndex();
@@ -703,6 +695,10 @@ public class HomePanel extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Gagal memuat lagu: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
         }
+        
+        
+        
+        
     }//GEN-LAST:event_skipButtonActionPerformed
 
     private void playFromPlaylistBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playFromPlaylistBtnActionPerformed
@@ -899,6 +895,49 @@ public class HomePanel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_loopButtonActionPerformed
 
+    private void addSongButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSongButton1ActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+
+        // Set default directory to Windows Music folder or fallback
+        String musicDir = System.getProperty("user.home") + File.separator + "Music";
+        File defaultDir = new File(musicDir);
+        if (!defaultDir.exists() || !defaultDir.isDirectory()) {
+            defaultDir = new File(System.getProperty("user.home"));
+        }
+        fileChooser.setCurrentDirectory(defaultDir);
+
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "Audio Files", "wav", "aiff", "au");
+        fileChooser.setFileFilter(filter);
+
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File songFile = fileChooser.getSelectedFile();
+
+            try {
+                Song newSong = new Song(songFile);
+                playlistManager.getInstance().addSong(newSong);
+                playlistModel.addElement(newSong.getName());
+                refreshPlaylist();
+
+                jPlaylist1.setSelectedIndex(playlistManager.getInstance().getPlaylist().size() - 1);
+
+
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+                JOptionPane.showMessageDialog(this,
+                        "Gagal menambahkan atau memutar lagu: " + ex.getMessage(),
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            }}
+    }//GEN-LAST:event_addSongButton1ActionPerformed
+
+    private void btnMoveUP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveUP1ActionPerformed
+        int current= jPlaylist1.getSelectedIndex(); 
+        playlistManager.setCurrentIndex(current);
+        playlistManager.moveUp();
+       refreshPlaylist(); 
+       jPlaylist1.setSelectedIndex(current-1);
+    }//GEN-LAST:event_btnMoveUP1ActionPerformed
+
 
     private void refreshPlaylist() {
         playlistModel.clear();
@@ -942,8 +981,10 @@ public class HomePanel extends javax.swing.JFrame {
     private javax.swing.JButton Pause;
     private javax.swing.JButton PlaySelected;
     private javax.swing.JList<String> PlaylistHistory;
-    private javax.swing.JButton addSongButton;
+    private javax.swing.JButton addSongButton1;
     private javax.swing.JButton browseButton;
+    private javax.swing.JButton btnMoveDOWN;
+    private javax.swing.JButton btnMoveUP1;
     private javax.swing.JLabel currentTimeLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
