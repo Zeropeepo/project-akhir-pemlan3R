@@ -116,7 +116,6 @@ public class HomePanel extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jPlaylist1 = new javax.swing.JList<>();
         jLabel4 = new javax.swing.JLabel();
-        addSongButton = new javax.swing.JButton();
         btnMoveDOWN = new javax.swing.JButton();
         removeSongButton = new javax.swing.JButton();
         playFromPlaylistBtn = new javax.swing.JButton();
@@ -397,6 +396,7 @@ public class HomePanel extends javax.swing.JFrame {
         jLabel4.setText("Playlist");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, -1, -1));
 
+        btnMoveDOWN.setFont(new java.awt.Font("OCR A Extended", 0, 12)); // NOI18N
         btnMoveDOWN.setText("Move Down");
         btnMoveDOWN.setActionCommand("Add");
         btnMoveDOWN.addActionListener(new java.awt.event.ActionListener() {
@@ -404,7 +404,6 @@ public class HomePanel extends javax.swing.JFrame {
                 btnMoveDOWNActionPerformed(evt);
             }
         });
-        jPanel1.add(addSongButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 457, -1, -1));
         jPanel1.add(btnMoveDOWN, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 260, -1, -1));
 
         removeSongButton.setFont(new java.awt.Font("OCR A Extended", 0, 12)); // NOI18N
@@ -625,7 +624,6 @@ public class HomePanel extends javax.swing.JFrame {
 
     }//GEN-LAST:event_PlaySelectedActionPerformed
 
-            defaultDir = new File(System.getProperty("user.home"));
     private void btnMoveDOWNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveDOWNActionPerformed
    int current= jPlaylist1.getSelectedIndex(); 
         playlistManager.setCurrentIndex(current);
