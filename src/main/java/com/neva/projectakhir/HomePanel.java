@@ -520,7 +520,7 @@ public class HomePanel extends javax.swing.JFrame {
 
         try {
 
-            var playlistpointerchecker = playlistmanager.getPlaylist();
+            var playlistpointerchecker = playlistManager.getPlaylist();
             boolean hasexisted = false;
             for (Song song : playlistpointerchecker) {
                 if (song.getFile().getAbsolutePath().equals(audioFile.getAbsolutePath())) {
@@ -529,7 +529,7 @@ public class HomePanel extends javax.swing.JFrame {
                 }
             }
             if (!hasexisted) {
-            playlistmanager.addSong(new Song(fileChooser.getSelectedFile()));}
+            playlistManager.addSong(new Song(fileChooser.getSelectedFile()));}
         } catch (UnsupportedAudioFileException ex) {
             Logger.getLogger(HomePanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -546,7 +546,7 @@ updatelist();
 
     private void updatelist(){
             history.clear();
-            history.addAll(playlistmanager.getPlaylist());
+            history.addAll(playlistManager.getPlaylist());
             PlaylistHistory.setModel(history);
         System.out.println("Updated Playlist");
 
@@ -612,7 +612,7 @@ updatelist();
         AudioPlayer.stop();
         int indexnya = PlaylistHistory.getSelectedIndex();
                        // Get the selected file
-                File filenya=playlistmanager.getSongbyIndex(indexnya).getFile();
+                File filenya=playlistManager.getSongbyIndex(indexnya).getFile();
                 audioFile = filenya;
         try {
             if (AudioPlayer.getClip() != null && AudioPlayer.getClip().isOpen()) {
@@ -651,7 +651,7 @@ updatelist();
 
 
         try(FileWriter fw = new FileWriter(file, false)){ // false = overwrite
-            for (Song s : playlistmanager.getPlaylist()) {
+            for (Song s : playlistManager.getPlaylist()) {
                 fw.write(s.getFile().getAbsolutePath() + "\n");
             }
         }
@@ -676,7 +676,7 @@ updatelist();
 
         try(FileReader fr = new FileReader(file)){
             Scanner sc = new Scanner(fr);
-            var playlistpointer=playlistmanager.getPlaylist();
+            var playlistpointer=playlistManager.getPlaylist();
             while (sc.hasNextLine()) {
                 try{
                 playlistpointer.add(new Song(new File(sc.nextLine())));}
