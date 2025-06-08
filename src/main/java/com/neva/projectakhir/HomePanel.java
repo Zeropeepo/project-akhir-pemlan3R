@@ -6,7 +6,11 @@ import javazoom.jl.player.Player;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -125,9 +129,6 @@ public class HomePanel extends javax.swing.JFrame {
             }
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
-            }
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
             }
         });
 
@@ -491,7 +492,7 @@ public class HomePanel extends javax.swing.JFrame {
 
                 // Get the selected file
                 audioFile = fileChooser.getSelectedFile();
-                AudioPlayer.loadAudio(new Song(audioFile));
+                AudioPlayer.loadAudio(audioFile);
                 currentSongName = audioFile.getName();
                 songNameLabel.setText(currentSongName);
 
@@ -515,21 +516,13 @@ public class HomePanel extends javax.swing.JFrame {
                 ex.printStackTrace();
             }
         }
+    }//GEN-LAST:event_browseButtonActionPerformed
 
 
 
-        try {
-
-            var playlistpointerchecker = playlistManager.getPlaylist();
-            boolean hasexisted = false;
-            for (Song song : playlistpointerchecker) {
-                if (song.getFile().getAbsolutePath().equals(audioFile.getAbsolutePath())) {
-                    hasexisted = true;
-                    break;
-                }
-            }
-            if (!hasexisted) {
-            playlistManager.addSong(new Song(fileChooser.getSelectedFile()));}
+    private void historyUpdater(File tempfilehistory){
+       try {
+            historyarray.add(new Song(tempfilehistory));
         } catch (UnsupportedAudioFileException ex) {
             Logger.getLogger(HomePanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -538,31 +531,18 @@ public class HomePanel extends javax.swing.JFrame {
             Logger.getLogger(HomePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-updatelist();
-
-
-    }//GEN-LAST:event_browseButtonActionPerformed
-
-
-    private void updatelist(){
-            history.clear();
-            history.addAll(playlistManager.getPlaylist());
-            PlaylistHistory.setModel(history);
-        System.out.println("Updated Playlist");
-
-
+        history.clear();
+        history.addAll(historyarray);
+        //history.addElement(AudioPlayer.getFile().getName());
+        PlaylistHistory.setModel(history);
 }
+
     private void PauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PauseActionPerformed
         if (AudioPlayer.getClip() != null && AudioPlayer.isPlaying()) {
             AudioPlayer.pause();
             progressTimer.stop();
         }
     }//GEN-LAST:event_PauseActionPerformed
-
-
-
-
-
 
     private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playButtonActionPerformed
         if (AudioPlayer.getClip() != null) {
@@ -589,8 +569,8 @@ updatelist();
             }
         } else {
             JOptionPane.showMessageDialog(this,
-                "Please select an audio file first.",
-                "No File Selected", JOptionPane.INFORMATION_MESSAGE);
+                    "Please select an audio file first.",
+                    "No File Selected", JOptionPane.INFORMATION_MESSAGE);
         }
 
     }//GEN-LAST:event_playButtonActionPerformed
@@ -608,17 +588,17 @@ updatelist();
 
     private void PlaySelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlaySelectedActionPerformed
 
-        if (AudioPlayer.getClip() != null&& AudioPlayer.isPlaying())
         AudioPlayer.stop();
         int indexnya = PlaylistHistory.getSelectedIndex();
-                       // Get the selected file
-                File filenya=playlistManager.getSongbyIndex(indexnya).getFile();
-                audioFile = filenya;
+        PlaylistManager.getInstance().setCurrentIndex(indexnya);
+        // Get the selected file
+        File filenya=playlistManager.getInstance().getSongbyIndex(indexnya).getFile();
+        audioFile = filenya;
         try {
             if (AudioPlayer.getClip() != null && AudioPlayer.getClip().isOpen()) {
-                    AudioPlayer.stop();
-                }
-            AudioPlayer.loadAudio(new Song(audioFile));
+                AudioPlayer.stop();
+            }
+            AudioPlayer.loadAudio(audioFile);
         } catch (UnsupportedAudioFileException ex) {
             Logger.getLogger(HomePanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -626,29 +606,232 @@ updatelist();
         } catch (LineUnavailableException ex) {
             Logger.getLogger(HomePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-                currentSongName = audioFile.getName();
-                songNameLabel.setText(currentSongName);
+        currentSongName = audioFile.getName();
+        songNameLabel.setText(currentSongName);
 
-                // Set up the volume control
-                if (AudioPlayer.getClip().isControlSupported(FloatControl.Type.MASTER_GAIN)) {
-                    volumeControl = (FloatControl) AudioPlayer.getClip().getControl(FloatControl.Type.MASTER_GAIN);
-                    adjustVolume();
-                }
+        // Set up the volume control
+        if (AudioPlayer.getClip().isControlSupported(FloatControl.Type.MASTER_GAIN)) {
+            volumeControl = (FloatControl) AudioPlayer.getClip().getControl(FloatControl.Type.MASTER_GAIN);
+            adjustVolume();
+        }
 
-                // Calculate duration
-                songDurationInSeconds = (int)(AudioPlayer.getClip().getMicrosecondLength() / 1000000);
-                progressBar.setMaximum(songDurationInSeconds);
-                updateTimeLabels();
+        // Calculate duration
+        songDurationInSeconds = (int)(AudioPlayer.getClip().getMicrosecondLength() / 1000000);
+        progressBar.setMaximum(songDurationInSeconds);
+        updateTimeLabels();
 
-                // Play automatically
-                playButton.doClick();
+        // Play automatically
+        playButton.doClick();
 
 
     }//GEN-LAST:event_PlaySelectedActionPerformed
 
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-    File file = new File("DataUser.txt");
+    private void btnMoveDOWNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveDOWNActionPerformed
+   int current= jPlaylist1.getSelectedIndex(); 
+        playlistManager.setCurrentIndex(current);
+        playlistManager.moveDown();
+       refreshPlaylist(); 
+       jPlaylist1.setSelectedIndex(current+1);
+    }//GEN-LAST:event_btnMoveDOWNActionPerformed
 
+    private void removeSongButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeSongButtonActionPerformed
+        int selectedIndex = jPlaylist1.getSelectedIndex();
+        if (selectedIndex != -1) {
+
+            String songTitle = playlistModel.getElementAt(selectedIndex);
+            Song songToRemove = playlistManager.findSongByTitle(songTitle);
+
+            if (AudioPlayer.getFile() != null && AudioPlayer.getFile().equals(songToRemove.getFile())) {
+                AudioPlayer.stop();
+            }
+
+            playlistManager.removeSong(songToRemove);
+            playlistModel.removeElementAt(selectedIndex);
+
+            progressBar.setValue(0);
+        } else {
+            JOptionPane.showMessageDialog(this, "Pilih lagu yang ingin dihapus.");
+        }
+    }//GEN-LAST:event_removeSongButtonActionPerformed
+
+    private void skipButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skipButtonActionPerformed
+        Song nextSong = playlistManager.getInstance().getNextSong();
+        if (nextSong == null) {
+            JOptionPane.showMessageDialog(this, "Tidak ada lagu berikutnya dalam playlist.");
+            return;
+        }
+
+        try {
+            // Stop audio saat ini jika sedang diputar
+            if (AudioPlayer.getClip() != null && AudioPlayer.getClip().isOpen()) {
+                AudioPlayer.stop();
+            }
+
+            // Load lagu berikutnya
+            File songFile = nextSong.getFile();
+            AudioPlayer.loadAudio(songFile);
+            audioFile = songFile; // Simpan referensi untuk HomePanel
+            currentSongName = nextSong.getName();
+            songNameLabel.setText(currentSongName);
+            jPlaylist1.setSelectedIndex(playlistManager.getCurrentIndex());
+            // Volume control
+            if (AudioPlayer.getClip().isControlSupported(FloatControl.Type.MASTER_GAIN)) {
+                volumeControl = (FloatControl) AudioPlayer.getClip().getControl(FloatControl.Type.MASTER_GAIN);
+                adjustVolume();
+            }
+
+            // Atur durasi dan progress bar
+            songDurationInSeconds = (int) (AudioPlayer.getClip().getMicrosecondLength() / 1_000_000);
+            progressBar.setMaximum(songDurationInSeconds);
+            updateTimeLabels();
+
+            // Update selection di JList
+            jPlaylist1.setSelectedValue(nextSong, true);
+
+            // Play lagu
+            AudioPlayer.start();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Gagal memuat lagu: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_skipButtonActionPerformed
+
+    private void playFromPlaylistBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playFromPlaylistBtnActionPerformed
+        int selectedIndex = jPlaylist1.getSelectedIndex();
+        PlaylistManager.getInstance().setCurrentIndex(selectedIndex);
+        
+    if (selectedIndex != -1) {
+        String songTitle = playlistModel.getElementAt(selectedIndex);
+        Song selectedSong = playlistManager.findSongByTitle(songTitle);
+
+        if (selectedSong == null) {
+            JOptionPane.showMessageDialog(this, "Lagu tidak ditemukan di data playlist.");
+            return;
+        }
+
+        File songFile = selectedSong.getFile();
+
+        try {
+            if (AudioPlayer.getFile() != null && AudioPlayer.getFile().equals(songFile)) {
+                if (!AudioPlayer.isPlaying()) {
+                    AudioPlayer.resume();
+                    progressTimer.start(); // Resume time update
+                }
+            } else {
+                if (AudioPlayer.isPlaying()) {
+                    AudioPlayer.stop();
+                }
+                AudioPlayer.loadAudio(songFile);
+                AudioPlayer.start();
+                progressTimer.start(); // Start time update when new song is played
+
+                // Reset progress
+                progressBar.setValue(0);
+                currentPositionInSeconds = 0;
+
+                // Set the duration of song
+                songDurationInSeconds = (int)(AudioPlayer.getClip().getMicrosecondLength() / 1000000);
+                progressBar.setMaximum(songDurationInSeconds);
+                updateTimeLabels();
+            }
+
+            songNameLabel.setText(selectedSong.getName());
+            historyUpdater(songFile);
+            
+            
+            AudioPlayer.getClip().addLineListener(new LineListener() {
+                @Override
+                public void update(LineEvent event) {
+                    if (event.getType() == LineEvent.Type.STOP) {
+                        if (AudioPlayer.getClip().getMicrosecondPosition() >= AudioPlayer.getClip().getMicrosecondLength()) {
+                            // Song ended
+                            progressTimer.stop();
+                            progressBar.setValue(0);
+                            currentPositionInSeconds = 0;
+                            updateTimeLabels();
+                        }
+                    }
+                }
+            });
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Gagal memutar lagu: " + ex.getMessage());
+        }
+
+    } else {
+        JOptionPane.showMessageDialog(this, "Pilih lagu dari playlist.");
+    }
+    }//GEN-LAST:event_playFromPlaylistBtnActionPerformed
+
+    private void progressBarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_progressBarMouseClicked
+        if (AudioPlayer.getClip() != null){
+            int mouseX = evt.getX();
+            int progressBarWidth = progressBar.getWidth();
+            int durationInSeconds = (int)(AudioPlayer.getClip().getMicrosecondLength() / 1_000_000);
+            
+            double clickRatio = Math.min(1.0, Math.max(0.0, (double) mouseX / progressBarWidth));
+            int newPositionInSeconds = (int)(clickRatio * durationInSeconds);
+            
+            AudioPlayer.getClip().setMicrosecondPosition(newPositionInSeconds * 1_000_000L);
+            
+            progressBar.setValue(newPositionInSeconds);
+            currentPositionInSeconds = newPositionInSeconds;
+            updateTimeLabels();
+    }//GEN-LAST:event_progressBarMouseClicked
+}
+    
+    private void previousButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousButtonActionPerformed
+        Song previousSong = playlistManager.getInstance().getPreviousSong();
+        if (previousSong == null) {
+            JOptionPane.showMessageDialog(this, "Tidak ada lagu sebelumnya");
+            return;
+        }
+
+        try {
+            // Stop audio saat ini jika sedang diputar
+            if (AudioPlayer.getClip() != null && AudioPlayer.getClip().isOpen()) {
+                AudioPlayer.stop();
+            }
+
+            // Load lagu berikutnya
+            File songFile = previousSong.getFile();
+            AudioPlayer.loadAudio(songFile);
+            audioFile = songFile; // Simpan referensi untuk HomePanel
+            currentSongName = previousSong.getName();
+            songNameLabel.setText(currentSongName);
+            jPlaylist1.setSelectedIndex(playlistManager.getCurrentIndex());
+
+            // Volume control
+            if (AudioPlayer.getClip().isControlSupported(FloatControl.Type.MASTER_GAIN)) {
+                volumeControl = (FloatControl) AudioPlayer.getClip().getControl(FloatControl.Type.MASTER_GAIN);
+                adjustVolume();
+            }
+
+            // Atur durasi dan progress bar
+            songDurationInSeconds = (int) (AudioPlayer.getClip().getMicrosecondLength() / 1_000_000);
+            progressBar.setMaximum(songDurationInSeconds);
+            updateTimeLabels();
+
+            // Update selection di JList
+            jPlaylist1.setSelectedValue(previousSong, true);
+
+            // Play lagu
+            AudioPlayer.start();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Gagal memuat lagu: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_previousButtonActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        
+            File file = new File("DataUser.txt");
 
         try(FileWriter fw = new FileWriter(file, false)){ // false = overwrite
             for (Song s : playlistManager.getPlaylist()) {
@@ -659,14 +842,18 @@ updatelist();
             throw new RuntimeException(e);
         }
 
-        updatelist();
+        refreshPlaylist();
 
+
+        
     }//GEN-LAST:event_formWindowClosing
 
-
+    
+    
     boolean PlaylistLoaded=false;
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-
+        
+        
         if (PlaylistLoaded) {
             return;
         }
@@ -689,15 +876,75 @@ updatelist();
             throw new RuntimeException(e);
         }
 
-        updatelist();
+        refreshPlaylist();
+
+
+        
     }//GEN-LAST:event_formWindowActivated
+    
+    private boolean isLooping = false;
+    private void loopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loopButtonActionPerformed
+        isLooping = !isLooping;
+        if(isLooping){
+            loopButton.setText("Loop:ON");
+            loopButton.setBackground(new Color(30,215,96));
+            loopButton.setForeground(new Color(255,255,255));
+        } else{
+            loopButton.setText("Loop:OFF");
+            loopButton.setBackground(UIManager.getColor("Button.background"));
+        }
+    }//GEN-LAST:event_loopButtonActionPerformed
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formWindowOpened
+    private void addSongButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSongButton1ActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+
+        // Set default directory to Windows Music folder or fallback
+        String musicDir = System.getProperty("user.home") + File.separator + "Music";
+        File defaultDir = new File(musicDir);
+        if (!defaultDir.exists() || !defaultDir.isDirectory()) {
+            defaultDir = new File(System.getProperty("user.home"));
+        }
+        fileChooser.setCurrentDirectory(defaultDir);
+
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "Audio Files", "wav", "aiff", "au");
+        fileChooser.setFileFilter(filter);
+
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File songFile = fileChooser.getSelectedFile();
+
+            try {
+                Song newSong = new Song(songFile);
+                playlistManager.getInstance().addSong(newSong);
+                playlistModel.addElement(newSong.getName());
+                refreshPlaylist();
+
+                jPlaylist1.setSelectedIndex(playlistManager.getInstance().getPlaylist().size() - 1);
 
 
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+                JOptionPane.showMessageDialog(this,
+                        "Gagal menambahkan atau memutar lagu: " + ex.getMessage(),
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            }}
+    }//GEN-LAST:event_addSongButton1ActionPerformed
 
+    private void btnMoveUP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveUP1ActionPerformed
+        int current= jPlaylist1.getSelectedIndex(); 
+        playlistManager.setCurrentIndex(current);
+        playlistManager.moveUp();
+       refreshPlaylist(); 
+       jPlaylist1.setSelectedIndex(current-1);
+    }//GEN-LAST:event_btnMoveUP1ActionPerformed
+
+
+    private void refreshPlaylist() {
+        playlistModel.clear();
+        for (Song song : PlaylistManager.getInstance().getPlaylist()) {
+            playlistModel.addElement(song.getName());
+        }
+    }
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -706,8 +953,7 @@ updatelist();
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info :
-                    javax.swing.UIManager.getInstalledLookAndFeels()) {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;

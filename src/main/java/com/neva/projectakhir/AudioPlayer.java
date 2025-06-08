@@ -11,7 +11,7 @@ public class AudioPlayer {
     private static Clip clip;
     private static long pausePosition=0;
     private static boolean Playing = false;
-    private static Song song;
+    private static File file;
 
     public static long getDuration() {
         return clip.getMicrosecondLength();
@@ -51,13 +51,13 @@ public class AudioPlayer {
 
     }
 
-    public static Song getSong() {
-        return song;
+    public static File getFile() {
+        return file;
     }
 
-    public static void loadAudio(Song song) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        AudioPlayer.song = song;
-       clip = (song).getclip();
+    public static void loadAudio(File file) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        AudioPlayer.file = file;
+       clip = (new Song(file)).getclip();
     }
 
     public static Clip getClip() {
